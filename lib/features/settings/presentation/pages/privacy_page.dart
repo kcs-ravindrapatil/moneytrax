@@ -67,6 +67,18 @@ class PrivacyPage extends StatelessWidget {
             'service, investment advisor, or financial institution.',
             style: style,
           ),
+          const SizedBox(height: 24),
+          Text(
+            'Full Privacy Policy (web)',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
+          ),
+          const SizedBox(height: 8),
+          SelectableText(
+            'https://kcs-ravindrapatil.github.io/moneytrax/privacy-policy.html',
+            style: style?.copyWith(color: Theme.of(context).colorScheme.primary),
+          ),
         ],
       ),
     );
