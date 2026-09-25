@@ -34,7 +34,7 @@ class NotificationService {
     );
 
     await _plugin.initialize(
-      const InitializationSettings(android: android, iOS: ios),
+      settings: const InitializationSettings(android: android, iOS: ios),
     );
     _initialized = true;
   }
@@ -87,8 +87,8 @@ class NotificationService {
 
   Future<void> cancelReminders() async {
     await initialize();
-    await _plugin.cancel(_morningReminderId);
-    await _plugin.cancel(_eveningReminderId);
+    await _plugin.cancel(id: _morningReminderId);
+    await _plugin.cancel(id: _eveningReminderId);
   }
 
   /// Immediate confirmation after saving an expense.
@@ -102,10 +102,10 @@ class NotificationService {
         : 'Expense of $amountLabel for $categoryName saved.';
     try {
       await _plugin.show(
-        _expenseLoggedId,
-        'Expense logged',
-        detail,
-        const NotificationDetails(
+        id: _expenseLoggedId,
+        body: 'Expense logged',
+        title: detail,
+        notificationDetails: const NotificationDetails(
           android: AndroidNotificationDetails(
             'moneytrax_activity',
             'Activity',
@@ -130,11 +130,11 @@ class NotificationService {
   }) async {
     try {
       await _plugin.zonedSchedule(
-        id,
-        title,
-        body,
-        _nextInstanceOfTime(hour, minute),
-        const NotificationDetails(
+        id: id,
+        title: title,
+        body: body,
+        scheduledDate: _nextInstanceOfTime(hour, minute),
+        notificationDetails: const NotificationDetails(
           android: AndroidNotificationDetails(
             'moneytrax_reminders',
             'Daily reminders',
@@ -145,12 +145,13 @@ class NotificationService {
           iOS: DarwinNotificationDetails(),
         ),
         androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.time,
       );
     } catch (e) {
-      AppLogger.error('Failed to schedule notification $id', e);
+      AppLogger.error(
+        'Failed to schedule notification $id',
+        e,
+      );
     }
   }
 
