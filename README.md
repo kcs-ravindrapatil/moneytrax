@@ -162,6 +162,21 @@ Optional: `CONVEYGRID_PURPOSE_CODE` enables a `validateConsent` short-circuit so
 
 If the application key is missing, MoneyTrax falls back to `NoOpConsentIntegration` so local expense tracking still works.
 
+## Privacy Policy (Play Store)
+
+A public Privacy Policy page lives at:
+
+- File in this repo: [`docs/privacy-policy.html`](docs/privacy-policy.html)
+- After you enable **GitHub Pages** (Settings → Pages → Deploy from branch → `/docs`):
+
+```
+https://kcs-ravindrapatil.github.io/moneytrax/privacy-policy.html
+```
+
+Use that HTTPS URL in Google Play Console → App content → Privacy policy.
+
+Update the contact email inside `docs/privacy-policy.html` if needed before publishing.
+
 ## License / ownership
 
 Private project — not published to pub.dev (`publish_to: 'none'`).
