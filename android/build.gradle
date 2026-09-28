@@ -12,6 +12,13 @@ subprojects {
 subprojects {
     project.evaluationDependsOn(":app")
 }
+subprojects { subproject ->
+    subproject.plugins.withId("org.jetbrains.kotlin.android") {
+        subproject.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+            incremental = false
+        }
+    }
+}
 
 tasks.register("clean", Delete) {
     delete rootProject.buildDir

@@ -1,4 +1,4 @@
-package com.example.conveygrid_moneytracker
+package com.rysun.dailyexpensetracker
 
 import io.flutter.embedding.android.FlutterActivity
 
