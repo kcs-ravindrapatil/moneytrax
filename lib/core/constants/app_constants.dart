@@ -19,4 +19,5 @@ class AppConstants {
     'Bank Transfer',
     'Other',
   ];
+  static const String appLogo = 'assets/images/moneytrax_logo.jpg';
 }

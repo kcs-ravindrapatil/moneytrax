@@ -87,9 +87,10 @@ class _ReportsView extends StatelessWidget {
           final summary = state.summary!;
           final colors = Theme.of(context).colorScheme;
           return ListView(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 100),
+            padding: const EdgeInsets.fromLTRB(6, 8, 6, 100),
             children: [
               SegmentedButton<ReportPeriod>(
+                showSelectedIcon:false,
                 segments: const [
                   ButtonSegment(
                     value: ReportPeriod.daily,
@@ -146,6 +147,38 @@ class _ReportsView extends StatelessWidget {
                   }
                   context.read<ReportBloc>().add(ReportPeriodChanged(period));
                 },
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.resolveWith<Color?>(
+                        (states) {
+                      if (states.contains(WidgetState.selected)) {
+                        return Theme.of(context).colorScheme.primaryContainer;
+                      }
+                      return Colors.transparent;
+                    },
+                  ),
+                  foregroundColor: WidgetStateProperty.resolveWith<Color?>(
+                        (states) {
+                      if (states.contains(WidgetState.selected)) {
+                        return Theme.of(context).colorScheme.onPrimaryContainer;
+                      }
+                      return Theme.of(context).colorScheme.onSurface;
+                    },
+                  ),
+                  textStyle: WidgetStateProperty.resolveWith<TextStyle?>(
+                        (states) {
+                      if (states.contains(WidgetState.selected)) {
+                        return const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                        );
+                      }
+
+                      return const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      );
+                    },
+                  ), ),
               ),
               if (state.period == ReportPeriod.custom) ...[
                 const SizedBox(height: 12),

@@ -28,17 +28,13 @@ class WelcomePage extends StatelessWidget {
                 children: [
                   const Spacer(),
                   Container(
-                    padding: const EdgeInsets.all(18),
+                    height: 100,
+                    width: 100,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [colors.primary, colors.tertiary],
-                      ),
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    child: const Icon(
-                      Icons.account_balance_wallet_rounded,
-                      size: 48,
-                      color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                          image: AssetImage(AppConstants.appLogo),
+                        )
                     ),
                   ),
                   const SizedBox(height: 28),

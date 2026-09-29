@@ -46,6 +46,7 @@ class MainShellPage extends StatelessWidget {
           SettingsRoute(),
         ],
         bottomNavigationBuilder: (context, tabsRouter) {
+          final colors = Theme.of(context).colorScheme;
           return NavigationBar(
             selectedIndex: tabsRouter.activeIndex,
             onDestinationSelected: tabsRouter.setActiveIndex,
@@ -76,6 +77,23 @@ class MainShellPage extends StatelessWidget {
                 label: 'Settings',
               ),
             ],
+            labelTextStyle: WidgetStateProperty.resolveWith<TextStyle?>(
+                  (states) {
+                if (states.contains(WidgetState.selected)) {
+                  return TextStyle(
+                    color: colors.primary,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  );
+                }
+
+                return TextStyle(
+                  color: colors.onSurfaceVariant,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                );
+              },
+            ),
           );
         },
       ),
