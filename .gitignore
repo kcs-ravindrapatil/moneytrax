@@ -53,4 +53,8 @@ app.*.map.json
 # FVM Version Cache
 .fvm/
 
-/app_info
+# Local signing / Play Store secrets (never commit)
+/app_info/
+**/key.properties
+*.jks
+*.keystore
