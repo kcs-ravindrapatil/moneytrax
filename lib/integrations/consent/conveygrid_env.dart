@@ -1,3 +1,12 @@
+/// Which UI presents the consent notice.
+enum ConsentUiMode {
+  /// Official Sammati notice inside a Flutter WebView.
+  webview,
+
+  /// Native ConveyGrid Flutter SDK consent sheet.
+  sdk,
+}
+
 /// ConveyGrid host-app configuration.
 ///
 /// Resolution order per key:
@@ -40,6 +49,27 @@ class ConveyGridEnv {
   static const String _cookieConfigCodeDefine = String.fromEnvironment(
     'CONVEYGRID_COOKIE_CONFIG_CODE',
   );
+  static const String _consentUiDefine = String.fromEnvironment(
+    'CONVEYGRID_CONSENT_UI',
+  );
+
+  /// How consent UI is presented: [ConsentUiMode.webview] or [ConsentUiMode.sdk].
+  static ConsentUiMode get consentUiMode {
+    final raw = _resolve(
+      'CONVEYGRID_CONSENT_UI',
+      defineValue: _consentUiDefine,
+      fallback: 'webview',
+    ).toLowerCase();
+    switch (raw) {
+      case 'sdk':
+      case 'native':
+        return ConsentUiMode.sdk;
+      case 'webview':
+      case 'web':
+      default:
+        return ConsentUiMode.webview;
+    }
+  }
 
   static String _resolve(
     String key, {

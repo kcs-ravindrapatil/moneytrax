@@ -53,6 +53,7 @@ import '../integrations/consent/consent_integration.dart';
 import '../integrations/consent/conveygrid_consent_integration.dart';
 import '../integrations/consent/conveygrid_env.dart';
 import '../integrations/consent/noop_consent_integration.dart';
+import '../integrations/consent/webview_consent_integration.dart';
 
 final getIt = GetIt.instance;
 
@@ -298,9 +299,18 @@ Future<void> _registerConsentIntegration() async {
     return;
   }
 
+  final useWebView = ConveyGridEnv.consentUiMode == ConsentUiMode.webview;
+  AppLogger.debug(
+    useWebView
+        ? 'Consent UI mode: webview'
+        : 'Consent UI mode: sdk',
+  );
+
   getIt
     ..registerSingleton<ConveyGridClient>(client)
     ..registerLazySingleton<ConsentIntegration>(
-      () => ConveyGridConsentIntegration(getIt()),
+      () => useWebView
+          ? WebViewConsentIntegration(getIt())
+          : ConveyGridConsentIntegration(getIt()),
     );
 }

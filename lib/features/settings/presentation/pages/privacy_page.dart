@@ -41,8 +41,9 @@ class PrivacyPage extends StatelessWidget {
             'When you create a profile, MoneyTrax may send your full name, email, '
             'and mobile number to ConveyGrid to create or verify consent. If you '
             'already granted the required consents, MoneyTrax skips the consent popup. '
-            'Otherwise the ConveyGrid consent UI may appear. Consent processing uses '
-            'ConveyGrid’s servers and is separate from your local expense data.',
+            'Otherwise a consent notice may appear (WebView or native SDK, depending '
+            'on app configuration). Consent processing uses ConveyGrid’s servers and '
+            'is separate from your local expense data.',
             style: style,
           ),
           const SizedBox(height: 16),

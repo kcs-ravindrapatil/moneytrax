@@ -160,6 +160,17 @@ flutter run
 
 Optional: `CONVEYGRID_PURPOSE_CODE` enables a `validateConsent` short-circuit so the popup is skipped when that purpose is already granted.
 
+### Consent UI mode
+
+Set `CONVEYGRID_CONSENT_UI` in `.env` (default: `webview`):
+
+| Value | Behavior |
+| --- | --- |
+| `webview` | Sammati Web Notice SDK inside a Flutter WebView (`WebViewConsentIntegration`) |
+| `sdk` | Native ConveyGrid Flutter SDK sheet (`ConveyGridConsentIntegration`) |
+
+Profile registration always calls `ConsentIntegration.createConsent` after submit; only the presenter changes. Restart the app after changing the flag.
+
 If the application key is missing, MoneyTrax falls back to `NoOpConsentIntegration` so local expense tracking still works.
 
 ## Privacy Policy (Play Store)
